@@ -3,16 +3,16 @@
  * @author: caojianping
  * @Date: 2023-08-01 17:59:23
  */
-const { defineConfig } = require("@vue/cli-service");
-const webpack = require("webpack");
+const { defineConfig } = require('@vue/cli-service');
+const webpack = require('webpack');
 
 module.exports = defineConfig({
   pages: {
     index: {
-      entry: "./src/index.ts",
+      entry: './src/index.ts',
     },
   },
-  publicPath: "auto",
+  publicPath: 'auto',
   configureWebpack: {
     // devtool: false,
     optimization: {
@@ -20,17 +20,17 @@ module.exports = defineConfig({
       splitChunks: {
         cacheGroups: {
           defaultVendors: {
-            name: "chunk-vendors",
+            name: 'chunk-vendors',
             test: /[\\/]node_modules[\\/]/,
             priority: -10,
-            chunks: "async",
+            chunks: 'async',
             reuseExistingChunk: true,
           },
           common: {
-            name: "chunk-common",
+            name: 'chunk-common',
             minChunks: 2,
             priority: -20,
-            chunks: "async",
+            chunks: 'async',
             reuseExistingChunk: true,
           },
         },
@@ -38,12 +38,13 @@ module.exports = defineConfig({
     },
     plugins: [
       new webpack.container.ModuleFederationPlugin({
-        name: "base",
-        filename: "remoteEntry.js",
+        name: 'base',
+        filename: 'remoteEntry.js',
         // library: { type: "var", name: "base" },
         exposes: {
-          "./BaseOne.vue": "./src/components/BaseOne.vue",
-          "./BaseTwo.vue": "./src/components/BaseTwo.vue",
+          './remotes': './src/remote/index.ts',
+          './BaseOne.vue': './src/components/BaseOne.vue',
+          './BaseTwo.vue': './src/components/BaseTwo.vue',
         },
         shared: {
           vue: {

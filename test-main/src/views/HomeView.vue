@@ -2,20 +2,28 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <hr />
-    {{ SystemCodes.id }}|{{ SystemCodes.name }}
+
+    <h1>{{ BaseCodes.id }}|{{ BaseCodes.name }}</h1>
+    <h1>{{ SystemCodes.id }}|{{ SystemCodes.name }}</h1>
     <hr />
+
     <BaseOne></BaseOne>
     <hr />
+    <BaseTwo></BaseTwo>
+    <hr />
+
     <SystemOne></SystemOne>
     <hr />
     <SystemTwo></SystemTwo>
     <hr />
+
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <hr />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue";
+import { defineComponent, defineAsyncComponent } from 'vue';
 // import HelloWorld from "@/components/HelloWorld.vue";
 
 // 方式一：静态方式导入，结合vue.config.js中mf配置。
@@ -35,7 +43,7 @@ import { defineComponent, defineAsyncComponent } from "vue";
 // );
 
 export default defineComponent({
-  name: "HomeView",
+  name: 'HomeView',
   components: {
     // HelloWorld,
     // BaseOne,

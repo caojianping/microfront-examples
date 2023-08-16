@@ -9,7 +9,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import { mockFetch } from './utils';
+// import { mockFetch } from './utils';
 import { RemoteLoader } from './remote';
 
 async function render() {
@@ -25,19 +25,19 @@ async function render() {
   );
 
   // 第二种：远程异步组件注册测试
-  const remoteConfigs: any = await mockFetch([
-    {
-      url: 'http://localhost:9999/remoteEntry.js',
-      scope: 'base',
-      module: './BaseOne.vue',
-    },
-  ]);
-  for (let i = 0; i < remoteConfigs.length; i++) {
-    await loader.registerModule(remoteConfigs[i]);
-  }
+  // const remoteConfigs: any = await mockFetch([
+  //   {
+  //     url: 'http://localhost:9999/remoteEntry.js',
+  //     scope: 'base',
+  //     module: './BaseOne.vue',
+  //   },
+  // ]);
+  // for (let i = 0; i < remoteConfigs.length; i++) {
+  //   await loader.registerModule(remoteConfigs[i]);
+  // }
 
   // 第三种：动态异步组件注册测试
-  await loader.registerModulesByOptions(['system/remotes']);
+  await loader.registerRemoteModules(['base/remotes:9999', 'system/remotes:9001']);
   app.mount('#app');
 }
 

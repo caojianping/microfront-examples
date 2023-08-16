@@ -4,11 +4,11 @@
  * @Date: 2023-08-15 13:47:16
  */
 
-import { App } from "vue";
-import { RouteRecordRaw, Router } from "vue-router";
-import { generateTimestamp, isArray, isFunction } from "./utils";
-import { buildAsyncComponent, buildRemoteConfig } from "./helper";
-import { IRemoteConfig } from "./types";
+import { App } from 'vue';
+import { RouteRecordRaw, Router } from 'vue-router';
+import { generateTimestamp, isArray, isFunction } from './utils';
+import { buildAsyncComponent, buildRemoteConfig } from './helper';
+import { IRemoteConfig } from './types';
 
 export class RemoteLoader {
   public app: App;
@@ -21,9 +21,9 @@ export class RemoteLoader {
 
   async _loadScript(url: string) {
     return new Promise((resolve: any, reject: any) => {
-      const script: HTMLScriptElement = document.createElement("script");
+      const script: HTMLScriptElement = document.createElement('script');
       script.src = `${url}?t=${generateTimestamp()}`;
-      script.type = "text/javascript";
+      script.type = 'text/javascript';
       script.async = true;
       script.onload = function (...args) {
         resolve();
@@ -43,13 +43,13 @@ export class RemoteLoader {
         await container.init(__webpack_share_scopes__.default);
         const factory = await container.get(module);
         const Module = factory();
-        console.log("loadRemote Module", Module);
+        console.log('loadRemote Module', Module);
         return Module;
       } else {
         return null;
       }
     } catch (error: any) {
-      console.log("loadRemote error", error);
+      console.log('loadRemote error', error);
       throw error;
     }
   }
@@ -82,19 +82,18 @@ export class RemoteLoader {
   }
 
   async registerModule(config: IRemoteConfig) {
-    if (!config) throw new Error("异常的远程模块配置");
+    if (!config) throw new Error('异常的远程模块配置');
 
     await this._loadScript(config.url);
     const result = await this._loadModule(config.scope, config.module);
-    if (!result) throw new Error("异常的远程模块");
+    if (!result) throw new Error('异常的远程模块');
 
     const module: any = result.default || result;
-    if (!module) throw new Error("异常的远程模块");
+    if (!module) throw new Error('异常的远程模块');
 
-    console.log("registerModule", module, config);
     this.app.component(
       module.name,
-      buildAsyncComponent(() => module)
+      buildAsyncComponent(() => new Promise((resolve: any, reject: any) => resolve(module)))
     );
     return module;
   }
@@ -107,18 +106,19 @@ export class RemoteLoader {
     );
   }
 
-  async registerModulesByOptions(options: string[]) {
+  async registerRemoteModules(options: string[]) {
     return Promise.allSettled(
       options.map(async (option: string) => {
+        console.log(11111, option);
         const config: IRemoteConfig | null = buildRemoteConfig(option);
-        if (!config) throw new Error("异常的远程模块配置");
+        if (!config) throw new Error('异常的远程模块配置');
 
         await this._loadScript(config.url);
         const result = await this._loadModule(config.scope, config.module);
-        if (!result) throw new Error("异常的远程模块");
+        if (!result) throw new Error('异常的远程模块');
 
         const module: any = result.default || result;
-        if (!module) throw new Error("异常的远程模块");
+        if (!module) throw new Error('异常的远程模块');
 
         await this.registerInstall(module.install);
         this.registerRoutes(module.routes);

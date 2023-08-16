@@ -4,8 +4,8 @@
  * @Date: 2023-08-07 10:01:05
  */
 
-import { defineAsyncComponent, AsyncComponentLoader, Component } from "vue";
-import { IRemoteConfig } from "./types";
+import { defineAsyncComponent, AsyncComponentLoader, Component } from 'vue';
+import { IRemoteConfig } from './types';
 
 /**
  * 构建远程模块配置
@@ -13,14 +13,14 @@ import { IRemoteConfig } from "./types";
  * @returns 返回远程模块配置
  */
 export function buildRemoteConfig(option: string): IRemoteConfig | null {
-  const parts = (option || "").split("/");
-  const scope = parts.length >= 1 ? parts[0] : "";
-  const module = parts.length >= 2 ? parts[1] : "";
-  if (!scope || !module) return null;
+  const parts = (option || '').split(/(\/|:)/g);
+  const scope = parts.length >= 1 ? parts[0] : '';
+  const module = parts.length >= 3 ? parts[2] : '';
+  const port = parts.length >= 5 ? parts[4] : '';
+  if (!scope) return null;
 
-  // const url = `/${scope}/remoteEntry.js`;
-  const url = `http://localhost:9001/remoteEntry.js`;
-  return { scope, module: "./" + module, url };
+  const url = `http://localhost:${port}/remoteEntry.js`;
+  return { scope, module: './' + module, url };
 }
 
 /**
@@ -30,10 +30,7 @@ export function buildRemoteConfig(option: string): IRemoteConfig | null {
  * @returns 返回组件名称
  */
 export function getComponentName(name: string, prefix?: string): string {
-  let cname = (name || "").replace(
-    /[A-Z]/g,
-    (item: string) => "-" + item.toLowerCase()
-  );
+  let cname = (name || '').replace(/[A-Z]/g, (item: string) => '-' + item.toLowerCase());
   cname = prefix ? prefix + cname : cname.slice(1);
   return cname;
 }
@@ -63,12 +60,7 @@ export function buildAsyncComponent(loader: AsyncComponentLoader): Component {
      * @param fail 错误函数
      * @param attempts 重试次数
      */
-    onError(
-      error: Error,
-      retry: () => void,
-      fail: () => void,
-      attempts: number
-    ) {
+    onError(error: Error, retry: () => void, fail: () => void, attempts: number) {
       const isFetch = error.message?.match(/fetch/);
       if (isFetch && attempts <= 3) retry && retry();
       else fail && fail();

@@ -4,7 +4,7 @@
  * @Date: 2023-08-15 10:49:39
  */
 
-import { RouteRecordRaw } from "vue-router";
+import { RouteRecordRaw } from 'vue-router';
 
 export interface IRemoteConfig {
   /**
