@@ -6,6 +6,9 @@
 
 import { RouteRecordRaw } from 'vue-router';
 
+/**
+ * 远程配置接口
+ */
 export interface IRemoteConfig {
   /**
    * 作用域
@@ -23,6 +26,9 @@ export interface IRemoteConfig {
   url: string;
 }
 
+/**
+ * 远程注册接口
+ */
 export interface IRemoteRegister {
   /**
    * 安装模块
@@ -40,6 +46,9 @@ export interface IRemoteRegister {
   components: IRemoteComponent[];
 }
 
+/**
+ * 远程组件接口
+ */
 export interface IRemoteComponent {
   /**
    * 组件名称

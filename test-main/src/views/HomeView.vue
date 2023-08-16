@@ -8,16 +8,14 @@
     <hr />
 
     <BaseOne></BaseOne>
-    <hr />
-    <BaseTwo></BaseTwo>
+    <!-- <BaseTwo></BaseTwo> -->
     <hr />
 
     <SystemOne></SystemOne>
-    <hr />
-    <SystemTwo></SystemTwo>
+    <!-- <SystemTwo></SystemTwo> -->
     <hr />
 
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <HelloWorld msg="I'm Hello World component." />
     <hr />
   </div>
 </template>
@@ -53,3 +51,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.home {
+  background-color: burlywood;
+}
+</style>

@@ -1,21 +1,25 @@
 <template>
-  <div class="system-c02">
+  <div class="system-two">
     <p>{{ state.title }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive } from 'vue';
 
 export default defineComponent({
-  name: "SystemTwo",
+  name: 'SystemTwo',
   setup() {
     const state = reactive({
-      title: "我是系统组件02",
+      title: '我是系统组件02',
     });
     return { state };
   },
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped>
+.system-two {
+  background-color: green;
+}
+</style>

@@ -19,7 +19,8 @@ export function buildRemoteConfig(option: string): IRemoteConfig | null {
   const port = parts.length >= 5 ? parts[4] : '';
   if (!scope) return null;
 
-  const url = `http://localhost:${port}/remoteEntry.js`;
+  const { protocol, hostname } = window.location;
+  const url = `${protocol}//${hostname}:${port}/remoteEntry.js`;
   return { scope, module: './' + module, url };
 }
 

@@ -6,12 +6,23 @@
 
 import { App } from 'vue';
 import { RouteRecordRaw, Router } from 'vue-router';
+
+import { IRemoteConfig } from './types';
 import { generateTimestamp, isArray, isFunction } from './utils';
 import { buildAsyncComponent, buildRemoteConfig } from './helper';
-import { IRemoteConfig } from './types';
 
+/**
+ * 远程加载器
+ */
 export class RemoteLoader {
+  /**
+   * Vue实例
+   */
   public app: App;
+
+  /**
+   * 路由实例
+   */
   public router: Router;
 
   constructor(app: App, router: Router) {
@@ -19,6 +30,11 @@ export class RemoteLoader {
     this.router = router;
   }
 
+  /**
+   * 加载脚本
+   * @param url 链接地址
+   * @returns 返回脚本
+   */
   async _loadScript(url: string) {
     return new Promise((resolve: any, reject: any) => {
       const script: HTMLScriptElement = document.createElement('script');
@@ -36,6 +52,12 @@ export class RemoteLoader {
     });
   }
 
+  /**
+   * 加载模块
+   * @param scope 作用域
+   * @param module 模块
+   * @returns 返回模块
+   */
   async _loadModule(scope: string, module: string) {
     try {
       const container = (window as any)[scope];
@@ -54,6 +76,11 @@ export class RemoteLoader {
     }
   }
 
+  /**
+   * 注册安装
+   * @param install 安装函数
+   * @returns void
+   */
   async registerInstall(install: any) {
     if (!isFunction(install)) return;
 
@@ -64,14 +91,24 @@ export class RemoteLoader {
     module(this.app);
   }
 
-  registerRoutes(pages: RouteRecordRaw[]) {
-    if (!isArray(pages)) return;
+  /**
+   * 注册路由
+   * @param routes 路由集合
+   * @returns void
+   */
+  registerRoutes(routes: RouteRecordRaw[]) {
+    if (!isArray(routes)) return;
 
-    for (let i = 0; i < pages.length; i++) {
-      this.router.addRoute(pages[i]);
+    for (let i = 0; i < routes.length; i++) {
+      this.router.addRoute(routes[i]);
     }
   }
 
+  /**
+   * 注册组件
+   * @param components 组件集合
+   * @returns void
+   */
   registerComponents(components: any[]) {
     if (!isArray(components)) return;
 
@@ -81,6 +118,11 @@ export class RemoteLoader {
     }
   }
 
+  /**
+   * 注册模块
+   * @param config 配置
+   * @returns 返回已注册模块
+   */
   async registerModule(config: IRemoteConfig) {
     if (!config) throw new Error('异常的远程模块配置');
 
@@ -98,6 +140,11 @@ export class RemoteLoader {
     return module;
   }
 
+  /**
+   * 注册模块集合
+   * @param configs 配置集合
+   * @returns 返回已注册模块集合
+   */
   async registerModules(configs: IRemoteConfig[]) {
     return Promise.allSettled(
       configs.map(async (config: IRemoteConfig) => {
@@ -106,10 +153,14 @@ export class RemoteLoader {
     );
   }
 
+  /**
+   * 注册远程模块集合
+   * @param options 选项集合
+   * @returns 返回已注册远程模块集合
+   */
   async registerRemoteModules(options: string[]) {
     return Promise.allSettled(
       options.map(async (option: string) => {
-        console.log(11111, option);
         const config: IRemoteConfig | null = buildRemoteConfig(option);
         if (!config) throw new Error('异常的远程模块配置');
 
