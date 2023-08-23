@@ -1,6 +1,4 @@
 .DS_Store
-node_modules
-dist
 
 # local env files
 .env.local
@@ -25,3 +23,7 @@ pnpm-debug.log*
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
+# package directory
+node_modules
+dist

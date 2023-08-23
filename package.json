@@ -1,0 +1,44 @@
+{
+  "name": "microfront-examples",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "serve": "pnpm run serve:base&&pnpm run serve:system&&pnpm run serve:main",
+    "serve:base": "pnpm --filter microfront-base serve",
+    "serve:main": "pnpm --filter microfront-main serve",
+    "serve:system": "pnpm --filter microfront-system serve",
+    "build": "pnpm run build:base&&pnpm run build:system&&pnpm run build:main",
+    "build:base": "pnpm --filter microfront-base build",
+    "build:main": "pnpm --filter microfront-main build",
+    "build:system": "pnpm --filter microfront-system build",
+    "lint": "pnpm run lint:base&&pnpm run selintrve:system&&pnpm run lint:main",
+    "lint:base": "pnpm --filter microfront-base lint",
+    "lint:main": "pnpm --filter microfront-main lint",
+    "lint:system": "pnpm --filter microfront-system lint"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "less": "^4.0.0",
+    "less-loader": "^8.0.0",
+    "prettier": "^2.4.1",
+    "typescript": "~4.5.5"
+  }
+}

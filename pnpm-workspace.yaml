@@ -1,0 +1,4 @@
+packages:
+  - 'microfront-main'
+  - 'microfront-base'
+  - 'microfront-system'
