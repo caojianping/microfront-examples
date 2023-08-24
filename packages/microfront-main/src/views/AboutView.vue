@@ -8,6 +8,6 @@
 
 <style scoped>
 .about {
-  background-color: aquamarine;
+  background-color: skyblue;
 }
 </style>

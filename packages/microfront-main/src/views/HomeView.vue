@@ -8,11 +8,9 @@
     <hr />
 
     <BaseOne></BaseOne>
-    <!-- <BaseTwo></BaseTwo> -->
     <hr />
 
     <SystemOne></SystemOne>
-    <!-- <SystemTwo></SystemTwo> -->
     <hr />
 
     <HelloWorld msg="I'm Hello World component." />
@@ -54,6 +52,6 @@ export default defineComponent({
 
 <style scoped>
 .home {
-  background-color: burlywood;
+  background-color: aliceblue;
 }
 </style>

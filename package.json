@@ -2,6 +2,13 @@
   "name": "microfront-examples",
   "version": "1.0.0",
   "main": "index.js",
+  "keywords": [
+    "webpack5",
+    "module federation",
+    "vue3",
+    "vue-router",
+    "typescript"
+  ],
   "private": true,
   "scripts": {
     "serve:base": "pnpm --filter microfront-base serve",
@@ -16,7 +23,7 @@
     "lint:main": "pnpm --filter microfront-main lint",
     "lint:system": "pnpm --filter microfront-system lint"
   },
-  "author": "",
+  "author": "caojianping",
   "license": "ISC",
   "description": ""
 }
