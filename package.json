@@ -11,14 +11,15 @@
   ],
   "private": true,
   "scripts": {
+    "serve": "start powershell pnpm run serve:base && start powershell pnpm run serve:system && start powershell pnpm run serve:main",
     "serve:base": "pnpm --filter microfront-base serve",
     "serve:main": "pnpm --filter microfront-main serve",
     "serve:system": "pnpm --filter microfront-system serve",
-    "build": "pnpm run build:base & pnpm run build:system & pnpm run build:main",
+    "build": "pnpm run build:base && pnpm run build:system && pnpm run build:main",
     "build:base": "pnpm --filter microfront-base build",
     "build:main": "pnpm --filter microfront-main build",
     "build:system": "pnpm --filter microfront-system build",
-    "lint": "pnpm run lint:base & pnpm run lint:system & pnpm run lint:main",
+    "lint": "pnpm run lint:base && pnpm run lint:system && pnpm run lint:main",
     "lint:base": "pnpm --filter microfront-base lint",
     "lint:main": "pnpm --filter microfront-main lint",
     "lint:system": "pnpm --filter microfront-system lint"
