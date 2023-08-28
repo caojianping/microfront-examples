@@ -7,14 +7,16 @@ import { IRemoteConfig } from './types';
  * @returns 返回远程模块配置
  */
 export function buildRemoteConfig(option: string): IRemoteConfig | null {
+  const { protocol, hostname, port } = window.location;
   const parts = (option || '').split(/(\/|:)/g);
   const scope = parts.length >= 1 ? parts[0] : '';
   const module = parts.length >= 3 ? parts[2] : '';
-  const port = parts.length >= 5 ? parts[4] : '';
+  const uport = parts.length >= 5 ? parts[4] : '';
   if (!scope) return null;
 
-  const { protocol, hostname } = window.location;
-  const url = `${protocol}//${hostname}:${port}/remoteEntry.js`;
+  const url = uport
+    ? `${protocol}//${hostname}:${uport}/remoteEntry.js`
+    : `${protocol}//${hostname}:${port}/${scope}/remoteEntry.js`;
   return { scope, module: './' + module, url };
 }
 

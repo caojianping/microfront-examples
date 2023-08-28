@@ -1,0 +1,38 @@
+version: "3"
+services:
+  microfront-main:
+    build: ./packages/microfront-main
+    image: microfront-main
+    container_name: microfront-main-example
+    ports: 
+      - 9000:80
+    volumes:
+      - ./packages/microfront-main/dist:/usr/share/nginx/html
+    networks:
+      - default
+
+  microfront-base:
+    build: ./packages/microfront-base
+    image: microfront-base
+    container_name: microfront-base-example
+    ports: 
+      - 9999:80
+    volumes:
+      - ./packages/microfront-base/dist:/usr/share/nginx/html
+    networks:
+      - default
+      
+  microfront-system:
+    build: ./packages/microfront-system
+    image: microfront-system
+    container_name: microfront-system-example
+    ports: 
+      - 9001:80
+    volumes:
+      - ./packages/microfront-system/dist:/usr/share/nginx/html
+    networks:
+      - default
+      
+networks:
+  default:
+    driver: bridge

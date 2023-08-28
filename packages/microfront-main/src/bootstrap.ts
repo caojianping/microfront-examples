@@ -30,7 +30,12 @@ async function render() {
   // }
 
   // 第三种：动态异步组件注册测试
-  await loader.registerRemoteModules(['base/remotes:9999', 'system/remotes:9001']);
+  const options =
+    process.env.NODE_ENV === 'production'
+      ? ['base/remotes', 'system/remotes']
+      : ['base/remotes:9999', 'system/remotes:9001'];
+  console.log('options:', options);
+  await loader.registerRemoteModules(options);
   app.mount('#app');
 }
 
